@@ -18,6 +18,8 @@ module HockeyBrake
 
       # generate the log
       logstr = HockeyLog.generate_safe(data)
+
+      ha_app_id = data[:session_data][:ha_app_id] if data.respond_to?(:[]) && data[:session_data].present?
       description = (data.respond_to?(:to_json) ? data.send(:to_json) : data.send(:to_s))
 
       # generate the stirng io
@@ -25,7 +27,7 @@ module HockeyBrake
       descio = StringIO.new(description)
 
       # buidl the url
-      url = URI.parse(HockeyBrake.configuration.hockey_url)
+      url = URI.parse(HockeyBrake.configuration.hockey_url(ha_app_id))
 
       # send the request
       response = begin

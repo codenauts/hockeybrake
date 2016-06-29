@@ -18,8 +18,8 @@ module HockeyBrake
 
 
     # The service url
-    def hockey_url
-      "https://rink.hockeyapp.net/api/2/apps/#{app_id}/crashes/upload"
+    def hockey_url(alternative_app_id = nil)
+      "https://rink.hockeyapp.net/api/2/apps/#{alternative_app_id || app_id}/crashes/upload"
     end
 
     # ctor
